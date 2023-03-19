@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Interfaces\IBookRepository;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    private IBookRepository $bookRepository;
+
+    public function __construct(IBookRepository $bookRepository)
+    {
+        $this->bookRepository = $bookRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->bookRepository->getAllBooks());
     }
 
     /**
@@ -27,7 +27,9 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bookDetails = $request->all();
+        
+        return response()->json($this->bookRepository->createBook($bookDetails), 201);
     }
 
     /**
@@ -35,15 +37,13 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $book = $this->bookRepository->getBookById($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        if($book) {
+            return response()->json($book);
+        } else {
+            return response()->json(['message' => 'book not found'], 404);
+        }
     }
 
     /**
@@ -51,7 +51,17 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $book = $this->bookRepository->getBookById($id);
+
+        if(!$book) {
+            return response()->json(['message' => 'book not found'], 404);
+        } 
+
+        $bookDetails = $request->all();
+
+        $this->bookRepository->updateBookById($id, $bookDetails);
+        
+        return response()->json();
     }
 
     /**
@@ -59,6 +69,14 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = $this->bookRepository->getBookById($id);
+
+        if(!$book) {
+            return response()->json(['message' => 'book not found'], 404);
+        } 
+
+        $this->bookRepository->deleteBookById($id);
+
+        return response()->json();
     }
 }
