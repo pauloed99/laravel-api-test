@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\IUserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -12,6 +13,7 @@ class UserController extends Controller
     public function __construct(IUserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+        $this->middleware('jwt.verify', ['except' => ['store']]);
     }
 
     /**
@@ -28,6 +30,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $userDetails = $request->all();
+
+        $userDetails['password'] = bcrypt($request->password);
         
         return response()->json($this->userRepository->createUser($userDetails), 201);
     }

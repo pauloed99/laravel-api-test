@@ -12,6 +12,7 @@ class BookController extends Controller
     public function __construct(IBookRepository $bookRepository)
     {
         $this->bookRepository = $bookRepository;
+        $this->middleware('jwt.verify');
     }
 
     /**
