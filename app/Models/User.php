@@ -39,8 +39,6 @@ class User extends Authenticatable implements JWTSubject
         'password',
     ];
 
-    
-
     public $timestamps = false;
 
     /**

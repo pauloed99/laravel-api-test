@@ -25,10 +25,11 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
-
 });
 
 Route::apiResources([
     'users' => UserController::class,
     'books' => BookController::class,
 ]);
+
+Route::put('users/{email}/password', [UserController::class, 'updatePassword']);

@@ -31,8 +31,8 @@ class UserController extends Controller
     {
         $userDetails = $request->all();
 
-        $userDetails['password'] = bcrypt($request->password);
-        
+        $userDetails['password'] = Hash::make($request->password);
+
         return response()->json($this->userRepository->createUser($userDetails), 201);
     }
 
@@ -40,10 +40,10 @@ class UserController extends Controller
      * Display the specified resource.
      */
     public function show(string $email)
-    {   
+    {
         $user = $this->userRepository->getUserByEmail($email);
 
-        if($user) {
+        if ($user) {
             return response()->json($user);
         } else {
             return response()->json(['message' => 'user not found'], 404);
@@ -57,9 +57,9 @@ class UserController extends Controller
     {
         $user = $this->userRepository->getUserByEmail($email);
 
-        if(!$user) {
+        if (!$user) {
             return response()->json(['message' => 'user not found'], 404);
-        } 
+        }
 
         $userDetails = $request->all();
 
@@ -72,15 +72,34 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $email)
-    {   
+    {
         $user = $this->userRepository->getUserByEmail($email);
 
-        if(!$user) {
+        if (!$user) {
             return response()->json(['message' => 'user not found'], 404);
-        } 
+        }
 
         $this->userRepository->deleteUserByEmail($email);
-        
+
         return response()->json();
+    }
+
+    public function updatePassword(Request $request, string $email)
+    {
+        $user = $this->userRepository->getUserByEmail($email);
+
+        if (!$user) {
+            return response()->json(['msg' => 'user not found'], 404);
+        }
+
+        if (Hash::check($request->password, $user->password)) {
+            $request['newPassword'] = Hash::make($request->newPassword);
+
+            $user->update(['password' => $request->newPassword]);
+
+            return response()->json(['message' => 'password changed'], 200);
+        }
+
+        return response()->json(['message' => 'old password incorrect'], 400);
     }
 }
