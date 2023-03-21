@@ -7,60 +7,21 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O projeto desenvolvido usando o framework Laravel é uma API Rest, no qual há 2 CRUD'S relacionados a 2 entidades, Books e Users. Desse modo, inicialmente o usuário terá que se registrar e autenticar para ter acesso a todas as rotas da API.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Mais Detalhes sobre o Projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- O docker foi utilizado no projeto através do laradock https://laradock.io/.
+- É preciso ter o Docker Desktop instalado no computador em que for rodar o projeto.
+- Seguir os passos do site do laradock acima, com exceção do passo 1, uma vez que a pasta do laradock já foi clonado, e do passo 4. Após isso, o ambiente de produção com Docker já estará funcionando.
+- para usar os comandos do laravel, como php artisan, junto ao Docker, basta entrar no container que foi subido através das instruções do terceiro ponto e rodar o seguinte comando dentro da pasta laradock no terminal: "docker-compose workspace bash". 
+- Como no projeto foram instalados pacotes de terceiros através do composer, é necessário rodar o comando "composer install" no diretório do projeto.
+- é necessário rodar também o comando "cp .env.example .env" tanto no diretório do projeto como na pasta do laradock.
+- Para a autenticação e autorização da api foi o usado o pacote "tymon/jwt-auth", mais informações sobre ele no seguinte link: https://jwt-auth.readthedocs.io/en/develop/laravel-installation/ . 
+- É necessário rodar os comandos "php artisan:key generate", "php artisan jwt:secret" e "php artisan migrate" para configurar autenticação e tabelas do banco de dados.
 
-## Learning Laravel
+## Finalizando
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Após todas essas configurações será possível rodar a api com o Laravel.
