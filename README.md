@@ -15,7 +15,7 @@ O projeto desenvolvido usando o framework Laravel é uma API Rest, no qual há 2
 
 - O docker foi utilizado no projeto através do laradock https://laradock.io/.
 - É preciso ter o Docker Desktop instalado no computador em que for rodar o projeto.
-- Seguir os passos do site do laradock acima, com exceção do passo 1, uma vez que a pasta do laradock já foi clonado, e do passo 4. Após isso, o ambiente de produção com Docker já estará funcionando.
+- Seguir os passos do site do laradock acima para usar o Docker junto ao Laradock. Após isso, o ambiente de produção com Docker já estará funcionando.
 - para usar os comandos do laravel, como php artisan, junto ao Docker, basta entrar no container que foi subido através das instruções do terceiro ponto e rodar o seguinte comando dentro da pasta laradock no terminal: "docker-compose workspace bash". 
 - Como no projeto foram instalados pacotes de terceiros através do composer, é necessário rodar o comando "composer install" no diretório do projeto.
 - é necessário rodar também o comando "cp .env.example .env" tanto no diretório do projeto como na pasta do laradock.
